@@ -64,7 +64,7 @@ extension ImageCropperWrapper {
         return ImageCropperView(config: config,
                                 image: $image,
                                 transformation: $transformation,
-                                cropInfo: .constant(nil)) {
+                                cropInfo: .constant(nil)) {_ in 
             presentationMode.wrappedValue.dismiss()
         }
     }
@@ -73,7 +73,7 @@ extension ImageCropperWrapper {
         var config = Mantis.Config()
         config.cropViewConfig.showAttachedRotationControlView = false
         
-        return ImageCropperView(config: config, image: $image, transformation: $transformation, cropInfo: .constant(nil)) {
+        return ImageCropperView(config: config, image: $image, transformation: $transformation, cropInfo: .constant(nil)) {_ in 
             presentationMode.wrappedValue.dismiss()
         }
     }
@@ -86,7 +86,7 @@ extension ImageCropperWrapper {
                                 image: $image,
                                 transformation: $transformation,
                                 cropInfo: .constant(nil),
-                                action: $action) {
+                                action: $action) {_ in 
             presentationMode.wrappedValue.dismiss()
         }
     }

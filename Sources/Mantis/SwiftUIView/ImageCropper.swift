@@ -56,7 +56,7 @@ public struct ImageCropperView: UIViewControllerRepresentable {
     @Binding var cropInfo: CropInfo?
     @Binding var action: CropAction?
     
-    let onDismiss: () -> Void
+    let onDismiss: (Bool) -> Void
     
     /// Creates an `ImageCropper` view with optional custom configuration and required image bindings.
     ///
@@ -70,7 +70,7 @@ public struct ImageCropperView: UIViewControllerRepresentable {
                 transformation: Binding<Transformation?>,
                 cropInfo: Binding<CropInfo?>,
                 action: Binding<CropAction?> = .constant(nil),
-                onDismiss: @escaping () -> Void = {}) {
+                onDismiss: @escaping (Bool) -> Void = { _ in }) {
         self.config = config
         self._image = image
         self._transformation = transformation
@@ -102,12 +102,12 @@ public struct ImageCropperView: UIViewControllerRepresentable {
             
             DispatchQueue.main.async {
                 self.isProcessingAction = false
-                self.parent.onDismiss()
+                self.parent.onDismiss(true)
             }
         }
         
         public func cropViewControllerDidCancel(_ cropViewController: Mantis.CropViewController, original: UIImage) {
-            parent.onDismiss()
+            parent.onDismiss(false)
         }
         
         func handleAction() {
